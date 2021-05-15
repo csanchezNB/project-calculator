@@ -5,9 +5,8 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class SubtractionDto {
+public class ResultDto {
 
-	private BigDecimal num1;
+	private BigDecimal result;
 	
-	private BigDecimal num2;
 }
