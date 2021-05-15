@@ -1,9 +1,10 @@
 package com.sanitas.calculator;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import io.corp.calculator.TracerImpl;
 
 @SpringBootApplication
 public class Application {
@@ -13,8 +14,8 @@ public class Application {
 	}
 	
 	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
+	public TracerImpl tracerAPI() {
+	    return new TracerImpl();
 	}	
 
 

@@ -1,6 +1,8 @@
 package com.sanitas.calculator.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import com.sanitas.calculator.mapper.OperationMapper;
 import com.sanitas.calculator.model.Operation;
 import com.sanitas.calculator.service.CalculatorService;
 
+import io.corp.calculator.TracerImpl;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,6 +31,9 @@ public class CalculatorController {
 	
     @Autowired
     private OperationMapper operationMapper;
+    
+    @Autowired
+    private TracerImpl tracerAPI;
 
 	@io.swagger.v3.oas.annotations.Operation(summary = "Get result of an operation of two numbers.")
 	@ApiResponses(value = {
@@ -36,9 +42,12 @@ public class CalculatorController {
 			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
 	@GetMapping("/execute")
 	public ResponseEntity<ResultDto> execute(BigDecimal num1, BigDecimal num2, String operator) {
+		
 		Operation operation = operationMapper.convertToOperation(operator);
 		ResultDto result = new ResultDto();
 		result.setResult(calculatorService.execute(num1, num2, operation));
+		
+		tracerAPI.trace(LocalDateTime.now() + " -- CalculatorController - execute - EndWithStatus :: " + HttpStatus.OK);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
