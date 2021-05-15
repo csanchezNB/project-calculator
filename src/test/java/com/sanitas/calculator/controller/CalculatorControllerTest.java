@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sanitas.calculator.dto.ResultDto;
+import com.sanitas.calculator.exception.GeneralResponseException;
 import com.sanitas.calculator.mapper.OperationMapper;
 import com.sanitas.calculator.model.Addition;
 import com.sanitas.calculator.model.Operation;
@@ -59,6 +60,19 @@ public class CalculatorControllerTest {
 
 		assertEquals(result.getBody().getResult(), new BigDecimal(1.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
+	}
+	
+	@Test
+	public void whenExecuteOperationWithBadArgument_shouldReturn406Error() {
+		Operation operation = new Subtraction();
+		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
+		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
+		try {
+			ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00), "bad_argument");
+		}catch (GeneralResponseException e) {
+			assertEquals(e.getStatus(), HttpStatus.NOT_ACCEPTABLE);
+		}
 
+		
 	}
 }

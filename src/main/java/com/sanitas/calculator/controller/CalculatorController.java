@@ -67,12 +67,12 @@ public class CalculatorController {
 
 	private void checkParams(BigDecimal num1, BigDecimal num2, String operator) {
 		if(null == num1 || null == num2 || null == operator) {
-			tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_CHECK + HttpStatus.NOT_FOUND);
+			tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_CHECK + HttpStatus.NOT_ACCEPTABLE);
 			throw new GeneralResponseException(HttpStatus.NOT_ACCEPTABLE, Constants.ERROR, Constants.DESCRIPTION_ERROR_PARAMS);			
 		}
 		
 		if(!operator.trim().equalsIgnoreCase(Constants.ADD) && !operator.trim().equalsIgnoreCase(Constants.SUB)) {
-			tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_CHECK + HttpStatus.NOT_FOUND);
+			tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_CHECK + HttpStatus.NOT_ACCEPTABLE);
 			throw new GeneralResponseException(HttpStatus.NOT_ACCEPTABLE, Constants.ERROR, Constants.DESCRIPTION_ERROR_PARAMS_OPERATOR);			
 		}
 		
