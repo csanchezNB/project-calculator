@@ -22,4 +22,12 @@ Con @Mock inicializamos el servicio en el test.
 	
 **Continuamos con la implementación para mejorar la escalabilidad de operaciones e intentar unificar código y métodos.**
 
+*Tag_Add_Sub_v2_20210515* 
 
+Trabajamos ahora con el fin de favorecer la escalabilidad.
+
+Modificamos los test para unificar los métodos de sumar/restar en uno solo, añadiendo el parámetro de operador.
+
+Añadimos la lógica necesaria para que no fallen los test.
+
+Creamos una interfaz Operation, la cual tendrá el método 'execute', que tendrán que implementar las clases Addition y Subtraction. Delegamos la funcionalidad de las operaciones a estas clases.
