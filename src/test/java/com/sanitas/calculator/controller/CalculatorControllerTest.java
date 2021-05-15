@@ -68,11 +68,21 @@ public class CalculatorControllerTest {
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
 		try {
-			ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00), "bad_argument");
+			calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00), "bad_argument");
 		}catch (GeneralResponseException e) {
 			assertEquals(e.getStatus(), HttpStatus.NOT_ACCEPTABLE);
 		}
-
-		
+	}
+	
+	@Test
+	public void whenExecuteOperationWithNoArgument_shouldReturn406Error() {
+		Operation operation = new Subtraction();
+		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
+		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
+		try {
+			calculatorController.execute(null, null, Constants.SUB);
+		}catch (GeneralResponseException e) {
+			assertEquals(e.getStatus(), HttpStatus.NOT_ACCEPTABLE);
+		}
 	}
 }
