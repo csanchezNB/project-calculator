@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sanitas.calculator.dto.ResultDto;
@@ -31,16 +33,19 @@ public class CalculatorControllerTest {
 	@Test
 	public void whenExecuteAddition_shouldReturnTheAdditionOfTwoNumbers() {
 		when(calculatorService.executeAddition(Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(3.00));
-		ResultDto result = calculatorController.executeAddition(new BigDecimal(1.00), new BigDecimal(2.00));
+		ResponseEntity<ResultDto> result = calculatorController.executeAddition(new BigDecimal(1.00), new BigDecimal(2.00));
 		
-		assertEquals(result.getResult(), new BigDecimal(3.00));
+		assertEquals(result.getBody().getResult(), new BigDecimal(3.00));
+		assertEquals(result.getStatusCode(), HttpStatus.OK);
 	}
 
 	@Test
 	public void whenExecuteSubtraction_shouldReturnTheSubtractionOfTwoNumbers() {
 		when(calculatorService.executeSubtraction(Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
-		ResultDto result = calculatorController.executeSubtraction(new BigDecimal(2.00), new BigDecimal(1.00));
+		ResponseEntity<ResultDto> result = calculatorController.executeSubtraction(new BigDecimal(2.00), new BigDecimal(1.00));
 
-		assertEquals(result.getResult(), new BigDecimal(1.00));
+		assertEquals(result.getBody().getResult(), new BigDecimal(1.00));
+		assertEquals(result.getStatusCode(), HttpStatus.OK);
+
 	}
 }

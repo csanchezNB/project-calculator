@@ -3,6 +3,8 @@ package com.sanitas.calculator.controller;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,10 +31,10 @@ public class CalculatorController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ResultDto.class)) }),
 			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
 	@GetMapping("/addition")
-	public ResultDto executeAddition(BigDecimal num1, BigDecimal num2) {
+	public ResponseEntity<ResultDto> executeAddition(BigDecimal num1, BigDecimal num2) {
 		ResultDto result = new ResultDto();
 		result.setResult(calculatorService.executeAddition(num1, num2));
-		return result;
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
 	@Operation(summary = "Get result of subtraction of two numbers.")
@@ -41,10 +43,10 @@ public class CalculatorController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ResultDto.class)) }),
 			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
 	@GetMapping("/subtraction")
-	public ResultDto executeSubtraction(BigDecimal num1, BigDecimal num2) {
+	public ResponseEntity<ResultDto> executeSubtraction(BigDecimal num1, BigDecimal num2) {
 		ResultDto result = new ResultDto();
 		result.setResult(calculatorService.executeSubtraction(num1, num2));
-		return result;
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
 }
