@@ -10,12 +10,17 @@ import org.springframework.http.ResponseEntity;
 
 import com.sanitas.calculator.dto.ErrorDto;
 
+/**
+ * 
+ * @author csanchez
+ *
+ */
 @SpringBootTest
 public class CustomGlobalExceptionHandlerTest {
 
 
     @Test
-    public void whenCreateException_returnsNewException() {
+    public void whenCreateException_shouldReturnsNewException() {
     	CustomGlobalExceptionHandler exHandler = new CustomGlobalExceptionHandler();
     	String myErr = "MyError";
     	String myDesc = "MyDescription";

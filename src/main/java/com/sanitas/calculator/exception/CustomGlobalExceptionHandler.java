@@ -14,7 +14,7 @@ import com.sanitas.calculator.dto.ErrorDto;
 import com.sanitas.calculator.utils.Constants;
 
 /**
- * @author csanchez
+ * @author csanchez Global exception Handling
  *
  */
 @ControllerAdvice
@@ -22,9 +22,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 	/**
 	 * Handle GeneralResponseException throwed
+	 * 
 	 * @param ex
 	 * @param request
-	 * @return
+	 * @return ResponseEntity<Object> ErrorDto
 	 */
 	@ExceptionHandler(value = { GeneralResponseException.class })
 	protected ResponseEntity<Object> handleConflict(GeneralResponseException ex, WebRequest request) {

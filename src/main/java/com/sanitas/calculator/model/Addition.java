@@ -2,6 +2,11 @@ package com.sanitas.calculator.model;
 
 import java.math.BigDecimal;
 
+/**
+ * 
+ * @author csanchez Addition type of Operation
+ *
+ */
 public class Addition implements Operation {
 
 	@Override

@@ -10,23 +10,28 @@ import com.sanitas.calculator.model.Addition;
 import com.sanitas.calculator.model.Subtraction;
 import com.sanitas.calculator.utils.Constants;
 
+/**
+ * 
+ * @author csanchez
+ *
+ */
 @SpringBootTest
 public class OperationMapperTest {
 
-	 private static OperationMapper operationMapper;
+	private static OperationMapper operationMapper;
 
-    @Before
-    public void setup() {
-    	operationMapper = new OperationMapper();
-    }
+	@Before
+	public void setup() {
+		operationMapper = new OperationMapper();
+	}
 
-    @Test
-    public void whenConvertToAddition_shouldReturnAdditionObject() {
-    	assertTrue(operationMapper.convertToOperation(Constants.ADD) instanceof Addition);
-    }
-    
-    @Test
-    public void whenConvertToSubtraction_shouldReturnAdditionObject() {
-    	assertTrue(operationMapper.convertToOperation(Constants.SUB) instanceof Subtraction);
-    }
+	@Test
+	public void whenConvertToAddition_shouldReturnAdditionObject() {
+		assertTrue(operationMapper.convertToOperation(Constants.ADD) instanceof Addition);
+	}
+
+	@Test
+	public void whenConvertToSubtraction_shouldReturnAdditionObject() {
+		assertTrue(operationMapper.convertToOperation(Constants.SUB) instanceof Subtraction);
+	}
 }

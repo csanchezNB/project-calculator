@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author csanchez
+ * @author csanchez General response exception
  *
  */
 @Data

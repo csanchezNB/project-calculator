@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 import com.sanitas.calculator.model.Operation;
 import com.sanitas.calculator.service.CalculatorService;
 
+/**
+ * 
+ * @author csanchez Implementation of Service layer
+ *
+ */
 @Component
 public class CalculatorServiceImpl implements CalculatorService {
 

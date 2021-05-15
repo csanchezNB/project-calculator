@@ -6,18 +6,20 @@ import org.springframework.context.annotation.Bean;
 
 import io.corp.calculator.TracerImpl;
 
+/**
+ * 
+ * @author csanchez Main Class.
+ */
 @SpringBootApplication
 public class Application {
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@Bean
 	public TracerImpl tracerAPI() {
-	    return new TracerImpl();
-	}	
+		return new TracerImpl();
+	}
 
-
-	
 }
