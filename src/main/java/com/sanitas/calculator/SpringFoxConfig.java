@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SpringFoxConfig {                                    
    
     @Bean
-    public Docket api() { 
+    public static Docket api() { 
     	return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.sanitas.calculator.controller"))
