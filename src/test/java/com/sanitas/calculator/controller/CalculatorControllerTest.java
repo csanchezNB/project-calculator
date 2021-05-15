@@ -23,6 +23,7 @@ import com.sanitas.calculator.model.Operation;
 import com.sanitas.calculator.model.Subtraction;
 import com.sanitas.calculator.service.CalculatorService;
 import com.sanitas.calculator.service.impl.CalculatorServiceImpl;
+import com.sanitas.calculator.utils.Constants;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,7 +44,7 @@ public class CalculatorControllerTest {
 		Operation operation = new Addition();
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(3.00));
-		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(1.00), new BigDecimal(2.00), "ADD");
+		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(1.00), new BigDecimal(2.00), Constants.ADD);
 		
 		assertEquals(result.getBody().getResult(), new BigDecimal(3.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
@@ -54,7 +55,7 @@ public class CalculatorControllerTest {
 		Operation operation = new Subtraction();
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
-		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00), "SUB");
+		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00), Constants.SUB);
 
 		assertEquals(result.getBody().getResult(), new BigDecimal(1.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);

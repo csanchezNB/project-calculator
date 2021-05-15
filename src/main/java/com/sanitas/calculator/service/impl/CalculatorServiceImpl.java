@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
-import com.sanitas.calculator.model.Addition;
 import com.sanitas.calculator.model.Operation;
-import com.sanitas.calculator.model.Subtraction;
 import com.sanitas.calculator.service.CalculatorService;
 
 @Component
