@@ -26,25 +26,25 @@ public class CalculatorController {
 	@Operation(summary = "Get result of addition of two numbers.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Operation done", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = BigDecimal.class)) }),
-			@ApiResponse(responseCode = "409", description = "Error retrieving user", content = @Content),
-			@ApiResponse(responseCode = "400", description = "Incorrect request", content = @Content) })
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ResultDto.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
 	@GetMapping("/addition")
 	public ResultDto executeAddition(BigDecimal num1, BigDecimal num2) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultDto result = new ResultDto();
+		result.setResult(calculatorService.executeAddition(num1, num2));
+		return result;
 	}
 
 	@Operation(summary = "Get result of subtraction of two numbers.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Found the user", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = BigDecimal.class)) }),
-			@ApiResponse(responseCode = "409", description = "Error retrieving user", content = @Content),
-			@ApiResponse(responseCode = "400", description = "Incorrect request", content = @Content) })
-	@GetMapping("/addition")
+			@ApiResponse(responseCode = "200", description = "Operation done", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ResultDto.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
+	@GetMapping("/subtraction")
 	public ResultDto executeSubtraction(BigDecimal num1, BigDecimal num2) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultDto result = new ResultDto();
+		result.setResult(calculatorService.executeSubtraction(num1, num2));
+		return result;
 	}
 
 }
