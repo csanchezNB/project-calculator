@@ -24,13 +24,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
 	public BigDecimal execute(BigDecimal num1, BigDecimal num2, Operation operation) {
-		if(operation instanceof Addition) {
-			return num1.add(num2);
-		}else if(operation instanceof Subtraction) {
-			return num1.subtract(num2);
-		}
-		
-		return null;
+		return operation.execute(num1, num2);
 	}
 
 }
