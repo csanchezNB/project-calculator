@@ -10,42 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sanitas.calculator.dto.ResultDto;
+import com.sanitas.calculator.mapper.OperationMapper;
+import com.sanitas.calculator.model.Operation;
 import com.sanitas.calculator.service.CalculatorService;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
-@RequestMapping(path = {"/api/v1/sanitas/calculator"}, produces = "application/json")
+@RequestMapping(path = {"/api/v2/sanitas/calculator"}, produces = "application/json")
 public class CalculatorController {
 
 	@Autowired
 	private CalculatorService calculatorService;
 	
-	@Operation(summary = "Get result of addition of two numbers.")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Operation done", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = ResultDto.class)) }),
-			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
-	@GetMapping("/addition")
-	public ResponseEntity<ResultDto> executeAddition(BigDecimal num1, BigDecimal num2) {
-		ResultDto result = new ResultDto();
-		result.setResult(calculatorService.executeAddition(num1, num2));
-		return ResponseEntity.status(HttpStatus.OK).body(result);
-	}
+    @Autowired
+    private OperationMapper operationMapper;
 
-	@Operation(summary = "Get result of subtraction of two numbers.")
+	@io.swagger.v3.oas.annotations.Operation(summary = "Get result of an operation of two numbers.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Operation done", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ResultDto.class)) }),
 			@ApiResponse(responseCode = "500", description = "Error executing operation", content = @Content)})
-	@GetMapping("/subtraction")
-	public ResponseEntity<ResultDto> executeSubtraction(BigDecimal num1, BigDecimal num2) {
+	@GetMapping("/execute")
+	public ResponseEntity<ResultDto> execute(BigDecimal num1, BigDecimal num2, String operator) {
+		Operation operation = operationMapper.convertToOperation(operator);
 		ResultDto result = new ResultDto();
-		result.setResult(calculatorService.executeSubtraction(num1, num2));
+		result.setResult(calculatorService.execute(num1, num2, operation));
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 

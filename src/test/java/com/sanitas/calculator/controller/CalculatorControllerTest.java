@@ -17,6 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sanitas.calculator.dto.ResultDto;
+import com.sanitas.calculator.mapper.OperationMapper;
+import com.sanitas.calculator.model.Addition;
+import com.sanitas.calculator.model.Operation;
+import com.sanitas.calculator.model.Subtraction;
 import com.sanitas.calculator.service.CalculatorService;
 import com.sanitas.calculator.service.impl.CalculatorServiceImpl;
 
@@ -29,11 +33,17 @@ public class CalculatorControllerTest {
 
 	@Mock
 	private final CalculatorService calculatorService = mock(CalculatorServiceImpl.class);
+	
+    @Mock
+    private final OperationMapper operationMapper = mock(OperationMapper.class);
+
 
 	@Test
 	public void whenExecuteAddition_shouldReturnTheAdditionOfTwoNumbers() {
-		when(calculatorService.executeAddition(Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(3.00));
-		ResponseEntity<ResultDto> result = calculatorController.executeAddition(new BigDecimal(1.00), new BigDecimal(2.00));
+		Operation operation = new Addition();
+		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
+		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(3.00));
+		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(1.00), new BigDecimal(2.00), "ADD");
 		
 		assertEquals(result.getBody().getResult(), new BigDecimal(3.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
@@ -41,8 +51,10 @@ public class CalculatorControllerTest {
 
 	@Test
 	public void whenExecuteSubtraction_shouldReturnTheSubtractionOfTwoNumbers() {
-		when(calculatorService.executeSubtraction(Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
-		ResponseEntity<ResultDto> result = calculatorController.executeSubtraction(new BigDecimal(2.00), new BigDecimal(1.00));
+		Operation operation = new Subtraction();
+		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
+		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
+		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00), "SUB");
 
 		assertEquals(result.getBody().getResult(), new BigDecimal(1.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
