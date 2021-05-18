@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 /**
  * 
- * @author csanchez Exposes the required paths by the API
+ * Exposes the required paths by the API
  */
 @RestController
 @RequestMapping(path = { "/api/v3/sanitas/calculator" }, produces = MediaType.APPLICATION_JSON_VALUE)

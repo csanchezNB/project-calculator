@@ -10,11 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.sanitas.calculator.dto.ErrorDto;
 
-/**
- * 
- * @author csanchez
- *
- */
+
 @SpringBootTest
 public class CustomGlobalExceptionHandlerTest {
 

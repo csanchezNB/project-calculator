@@ -25,11 +25,7 @@ import com.sanitas.calculator.service.CalculatorService;
 import com.sanitas.calculator.service.impl.CalculatorServiceImpl;
 import com.sanitas.calculator.utils.Constants;
 
-/**
- * 
- * @author csanchez
- *
- */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CalculatorControllerTest {

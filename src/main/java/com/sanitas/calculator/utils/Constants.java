@@ -1,7 +1,7 @@
 package com.sanitas.calculator.utils;
 
 /**
- * @author csanchez Constants
+ * Constants
  *
  */
 public class Constants {

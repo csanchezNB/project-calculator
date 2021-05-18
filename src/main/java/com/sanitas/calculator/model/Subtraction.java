@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * 
- * @author csanchez Subtraction type of Operation
+ * Subtraction type of Operation
  *
  */
 public class Subtraction implements Operation {

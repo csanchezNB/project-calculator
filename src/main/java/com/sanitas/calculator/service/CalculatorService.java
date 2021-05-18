@@ -6,7 +6,7 @@ import com.sanitas.calculator.model.Operation;
 
 /**
  * 
- * @author csanchez Service layer
+ * Service layer
  *
  */
 public interface CalculatorService {

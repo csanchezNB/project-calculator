@@ -10,11 +10,7 @@ import com.sanitas.calculator.model.Addition;
 import com.sanitas.calculator.model.Subtraction;
 import com.sanitas.calculator.utils.Constants;
 
-/**
- * 
- * @author csanchez
- *
- */
+
 @SpringBootTest
 public class OperationMapperTest {
 

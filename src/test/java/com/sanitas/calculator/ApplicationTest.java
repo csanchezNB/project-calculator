@@ -3,11 +3,7 @@ package com.sanitas.calculator;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * 
- * @author csanchez
- *
- */
+
 @SpringBootTest
 public class ApplicationTest {
 

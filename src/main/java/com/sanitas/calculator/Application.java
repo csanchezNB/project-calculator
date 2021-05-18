@@ -8,7 +8,7 @@ import io.corp.calculator.TracerImpl;
 
 /**
  * 
- * @author csanchez Main Class.
+ * Main Class.
  */
 @SpringBootApplication
 public class Application {

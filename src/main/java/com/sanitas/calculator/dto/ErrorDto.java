@@ -3,7 +3,7 @@ package com.sanitas.calculator.dto;
 import lombok.Data;
 
 /**
- * @author csanchez DTO for parsing a generic error
+ * DTO for parsing a generic error
  */
 @Data
 public class ErrorDto {

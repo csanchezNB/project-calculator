@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * 
- * @author csanchez Interface with the general execute method
+ * Interface with the general execute method
  *
  */
 public interface Operation {

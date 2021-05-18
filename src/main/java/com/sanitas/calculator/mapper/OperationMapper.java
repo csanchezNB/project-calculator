@@ -9,7 +9,7 @@ import com.sanitas.calculator.utils.Constants;
 
 /**
  * 
- * @author csanchez Handle conversion from operator to Operation
+ * Handle conversion from operator to Operation
  *
  */
 @Component

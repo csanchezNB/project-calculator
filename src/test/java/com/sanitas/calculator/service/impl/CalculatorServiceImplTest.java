@@ -11,11 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.sanitas.calculator.model.Addition;
 import com.sanitas.calculator.model.Subtraction;
 
-/**
- * 
- * @author csanchez
- *
- */
+
 @SpringBootTest
 public class CalculatorServiceImplTest {
 

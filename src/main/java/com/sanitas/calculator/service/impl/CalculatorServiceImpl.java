@@ -9,7 +9,7 @@ import com.sanitas.calculator.service.CalculatorService;
 
 /**
  * 
- * @author csanchez Implementation of Service layer
+ * Implementation of Service layer
  *
  */
 @Component

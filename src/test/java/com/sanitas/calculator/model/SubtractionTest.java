@@ -7,11 +7,7 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * 
- * @author csanchez
- *
- */
+
 @SpringBootTest
 public class SubtractionTest {
 
