@@ -108,7 +108,20 @@
 	      <scope>system</scope>
 	      <systemPath>${basedir}/src/lib/tracer-1.0.0-sources.jar</systemPath>
 	    </dependency>
+	    
+	    <dependency>
+		    <groupId>nl.jqno.equalsverifier</groupId>
+		    <artifactId>equalsverifier</artifactId>
+		    <version>3.6</version>
+		    <scope>test</scope>
+		</dependency>
     
+	    <dependency>
+		    <groupId>com.jparams</groupId>
+		    <artifactId>to-string-verifier</artifactId>
+		    <version>1.4.1</version>
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

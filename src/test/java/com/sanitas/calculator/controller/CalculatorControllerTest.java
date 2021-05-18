@@ -86,4 +86,6 @@ public class CalculatorControllerTest {
 			assertEquals(e.getStatus(), HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+
+
 }

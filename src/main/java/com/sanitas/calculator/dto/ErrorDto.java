@@ -1,11 +1,13 @@
 package com.sanitas.calculator.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * DTO for parsing a generic error
  */
-@Data
+@Getter
+@Setter
 public class ErrorDto {
 
 	private String error;

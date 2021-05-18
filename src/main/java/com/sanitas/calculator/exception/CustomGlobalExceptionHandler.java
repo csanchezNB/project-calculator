@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.sanitas.calculator.dto.ErrorDtoTest;
+import com.sanitas.calculator.dto.ErrorDto;
 import com.sanitas.calculator.utils.Constants;
 
 /**
@@ -29,7 +29,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	 */
 	@ExceptionHandler(value = { GeneralResponseException.class })
 	protected ResponseEntity<Object> handleConflict(final GeneralResponseException ex, final WebRequest request) {
-		final ErrorDtoTest errorDto = new ErrorDtoTest();
+		final ErrorDto errorDto = new ErrorDto();
 		errorDto.setError(ex.getError());
 		errorDto.setStatus(ex.getStatus().value());
 

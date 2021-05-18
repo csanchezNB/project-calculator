@@ -27,6 +27,7 @@ public class GeneralResponseException extends RuntimeException {
 		this.errorDescription = errorDescription;
 		this.status = status;
 
-	}
+	}	
+	
 
 }
