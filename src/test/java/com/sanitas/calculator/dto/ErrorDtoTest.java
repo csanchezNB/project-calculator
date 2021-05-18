@@ -1,5 +1,6 @@
 package com.sanitas.calculator.dto;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class ErrorDtoTest {
         
         assertNotNull(errorDto.getError());
         assertNotNull(errorDto.getErrorDescription());
-        assertNotNull(errorDto.getStatus());
+        assertEquals(0,errorDto.getStatus());
         assertNotNull(errorDto.getTimestamp());
 
     }

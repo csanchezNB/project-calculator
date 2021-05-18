@@ -52,6 +52,8 @@ public class CalculatorController {
 		try {
 			result = calculatorService.execute(num1, num2, operator);
 		} catch(GeneralResponseException gre) {
+			tracerAPI.trace(
+					LocalDateTime.now() + Constants.LOG_CALCULATOR_EXECUTE + gre.getStatus());
 			throw gre;
 		}
 
