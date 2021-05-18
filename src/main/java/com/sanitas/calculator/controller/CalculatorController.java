@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sanitas.calculator.exception.GeneralResponseException;
-import com.sanitas.calculator.mapper.OperationMapper;
-import com.sanitas.calculator.model.Operation;
 import com.sanitas.calculator.service.CalculatorService;
 import com.sanitas.calculator.utils.Constants;
 
@@ -34,8 +32,6 @@ public class CalculatorController {
 	@Autowired
 	private CalculatorService calculatorService;
 
-	@Autowired
-	private OperationMapper operationMapper;
 
 	@Autowired
 	private TracerImpl tracerAPI;
@@ -45,6 +41,7 @@ public class CalculatorController {
 			@ApiResponse(responseCode = Constants.CODE_200, description = Constants.CODE_200_DESC, content = {
 					@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = BigDecimal.class)) }),
 			@ApiResponse(responseCode = Constants.CODE_406, description = Constants.CODE_406_DESC, content = @Content),
+			@ApiResponse(responseCode = Constants.CODE_405, description = Constants.CODE_405_DESC, content = @Content),
 			@ApiResponse(responseCode = Constants.CODE_500, description = Constants.CODE_500_DESC, content = @Content) })
 	@GetMapping("/execute")
 	public ResponseEntity<BigDecimal> execute(final BigDecimal num1, final BigDecimal num2, final String operator) {
@@ -53,15 +50,9 @@ public class CalculatorController {
 
 		BigDecimal result = new BigDecimal(0);
 		try {
-			final Operation operation = operationMapper.convertToOperation(operator);
-			result = calculatorService.execute(num1, num2, operation);
+			result = calculatorService.execute(num1, num2, operator);
 		} catch(GeneralResponseException gre) {
 			throw gre;
-		} catch (Exception e) {
-			tracerAPI.trace(
-					LocalDateTime.now() + Constants.LOG_CALCULATOR_EXECUTE + HttpStatus.INTERNAL_SERVER_ERROR);
-			throw new GeneralResponseException(HttpStatus.INTERNAL_SERVER_ERROR, Constants.ERROR,
-					Constants.DESCRIPTION_ERROR);
 		}
 
 		tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_EXECUTE + HttpStatus.OK);
@@ -74,13 +65,6 @@ public class CalculatorController {
 			throw new GeneralResponseException(HttpStatus.NOT_ACCEPTABLE, Constants.ERROR,
 					Constants.DESCRIPTION_ERROR_PARAMS);
 		}
-
-		if (!operator.trim().equalsIgnoreCase(Constants.ADD) && !operator.trim().equalsIgnoreCase(Constants.SUB)) {
-			tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_CHECK + HttpStatus.NOT_ACCEPTABLE);
-			throw new GeneralResponseException(HttpStatus.NOT_ACCEPTABLE, Constants.ERROR,
-					Constants.DESCRIPTION_ERROR_PARAMS_OPERATOR);
-		}
-
 	}
 
 }

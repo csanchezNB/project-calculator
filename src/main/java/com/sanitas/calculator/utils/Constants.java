@@ -17,14 +17,17 @@ public class Constants {
 	public static final String DESCRIPTION_ERROR = "Se ha producido un error general en el servidor";
 	public static final String DESCRIPTION_ERROR_PARAMS = "Parámetros incorrectos.";
 	public static final String DESCRIPTION_ERROR_PARAMS_OPERATOR = "Parámetros incorrectos. El operador debe ser suma (ADD) o resta (SUB)";
+	public static final String DESCRIPTION_ERROR_OPERATOR = "Operación no soportada.";
 
 	public static final String CODE_200 = "200";
 	public static final String CODE_500 = "500";
 	public static final String CODE_406 = "406";
+	public static final String CODE_405 = "405";
 
 	public static final String CODE_200_DESC = "Operation done";
 	public static final String CODE_500_DESC = "Error executing operation";
 	public static final String CODE_406_DESC = "Wrong parameters";
+	public static final String CODE_405_DESC = "Method not allowed. Cannot execute the operation";
 
 	public static final String EXECUTE_DESC = "Get result of an operation of two numbers.";
 
