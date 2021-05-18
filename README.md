@@ -69,3 +69,15 @@ Trabajamos en la limpieza del código.
 Inyectamos la librería trace para gestionar el log.
 
 Añadimos test necesarios para cubrir el mayor porcentaje de código.
+
+*Tag_ClearCode_Coverage_20210521*
+
+Limpiamos código innecesario.
+
+Favorecemos mucho más la escalabilidad.
+
+Creamos una factoría de Operations con el fin de delegar la decisión de poder o no ejecutar una operación a los Componentes.
+
+Ya no es necesaria la clase OperationMapper.
+
+Mejoramos todavía más la cobertura llegando a un 99.5%
