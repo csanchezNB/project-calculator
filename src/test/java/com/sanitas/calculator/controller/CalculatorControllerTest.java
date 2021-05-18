@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.sanitas.calculator.dto.ResultDto;
 import com.sanitas.calculator.exception.GeneralResponseException;
 import com.sanitas.calculator.mapper.OperationMapper;
 import com.sanitas.calculator.model.Addition;
@@ -46,31 +45,31 @@ public class CalculatorControllerTest {
 
 	@Test
 	public void whenExecuteAddition_shouldReturnTheAdditionOfTwoNumbers() {
-		Operation operation = new Addition();
+		final Operation operation = new Addition();
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(3.00));
-		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(1.00), new BigDecimal(2.00),
+		ResponseEntity<BigDecimal> result = calculatorController.execute(new BigDecimal(1.00), new BigDecimal(2.00),
 				Constants.ADD);
 
-		assertEquals(result.getBody().getResult(), new BigDecimal(3.00));
+		assertEquals(result.getBody(), new BigDecimal(3.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
 	}
 
 	@Test
 	public void whenExecuteSubtraction_shouldReturnTheSubtractionOfTwoNumbers() {
-		Operation operation = new Subtraction();
+		final Operation operation = new Subtraction();
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
-		ResponseEntity<ResultDto> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00),
+		ResponseEntity<BigDecimal> result = calculatorController.execute(new BigDecimal(2.00), new BigDecimal(1.00),
 				Constants.SUB);
 
-		assertEquals(result.getBody().getResult(), new BigDecimal(1.00));
+		assertEquals(result.getBody(), new BigDecimal(1.00));
 		assertEquals(result.getStatusCode(), HttpStatus.OK);
 	}
 
 	@Test
 	public void whenExecuteOperationWithBadArgument_shouldReturn406Error() {
-		Operation operation = new Subtraction();
+		final Operation operation = new Subtraction();
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
 		try {
@@ -82,7 +81,7 @@ public class CalculatorControllerTest {
 
 	@Test
 	public void whenExecuteOperationWithNoArgument_shouldReturn406Error() {
-		Operation operation = new Subtraction();
+		final Operation operation = new Subtraction();
 		when(operationMapper.convertToOperation(Mockito.anyString())).thenReturn(operation);
 		when(calculatorService.execute(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(new BigDecimal(1.00));
 		try {

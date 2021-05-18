@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sanitas.calculator.dto.ResultDto;
 import com.sanitas.calculator.exception.GeneralResponseException;
 import com.sanitas.calculator.mapper.OperationMapper;
 import com.sanitas.calculator.model.Operation;
@@ -44,34 +43,32 @@ public class CalculatorController {
 	@io.swagger.v3.oas.annotations.Operation(summary = Constants.EXECUTE_DESC)
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = Constants.CODE_200, description = Constants.CODE_200_DESC, content = {
-					@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ResultDto.class)) }),
+					@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = BigDecimal.class)) }),
 			@ApiResponse(responseCode = Constants.CODE_406, description = Constants.CODE_406_DESC, content = @Content),
 			@ApiResponse(responseCode = Constants.CODE_500, description = Constants.CODE_500_DESC, content = @Content) })
 	@GetMapping("/execute")
-	public ResponseEntity<ResultDto> execute(BigDecimal num1, BigDecimal num2, String operator) {
+	public ResponseEntity<BigDecimal> execute(final BigDecimal num1, final BigDecimal num2, final String operator) {
 
 		checkParams(num1, num2, operator);
 
-		ResultDto result = new ResultDto();
+		BigDecimal result = new BigDecimal(0);
 		try {
-			Operation operation = operationMapper.convertToOperation(operator);
-			result.setResult(calculatorService.execute(num1, num2, operation));
+			final Operation operation = operationMapper.convertToOperation(operator);
+			result = calculatorService.execute(num1, num2, operation);
+		} catch(GeneralResponseException gre) {
+			throw gre;
 		} catch (Exception e) {
-			if (e instanceof GeneralResponseException) {
-				throw (GeneralResponseException) e;
-			} else {
-				tracerAPI.trace(
-						LocalDateTime.now() + Constants.LOG_CALCULATOR_EXECUTE + HttpStatus.INTERNAL_SERVER_ERROR);
-				throw new GeneralResponseException(HttpStatus.INTERNAL_SERVER_ERROR, Constants.ERROR,
-						Constants.DESCRIPTION_ERROR);
-			}
+			tracerAPI.trace(
+					LocalDateTime.now() + Constants.LOG_CALCULATOR_EXECUTE + HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new GeneralResponseException(HttpStatus.INTERNAL_SERVER_ERROR, Constants.ERROR,
+					Constants.DESCRIPTION_ERROR);
 		}
 
 		tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_EXECUTE + HttpStatus.OK);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
-	private void checkParams(BigDecimal num1, BigDecimal num2, String operator) {
+	private void checkParams(final BigDecimal num1, final BigDecimal num2, final String operator) {
 		if (null == num1 || null == num2 || null == operator) {
 			tracerAPI.trace(LocalDateTime.now() + Constants.LOG_CALCULATOR_CHECK + HttpStatus.NOT_ACCEPTABLE);
 			throw new GeneralResponseException(HttpStatus.NOT_ACCEPTABLE, Constants.ERROR,

@@ -15,13 +15,13 @@ public class GeneralResponseException extends RuntimeException {
 
 	private static final long serialVersionUID = -339505286053188424L;
 
-	private String error;
+	final private String error;
 
-	private String errorDescription;
+	final private String errorDescription;
 
-	private HttpStatus status;
+	final private HttpStatus status;
 
-	public GeneralResponseException(HttpStatus status, String error, String errorDescription) {
+	public GeneralResponseException(final HttpStatus status, final String error, final String errorDescription) {
 		super();
 		this.error = error;
 		this.errorDescription = errorDescription;

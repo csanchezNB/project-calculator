@@ -16,7 +16,7 @@ import com.sanitas.calculator.service.CalculatorService;
 public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
-	public BigDecimal execute(BigDecimal num1, BigDecimal num2, Operation operation) {
+	public BigDecimal execute(final BigDecimal num1, final BigDecimal num2, final Operation operation) {
 		return operation.execute(num1, num2);
 	}
 

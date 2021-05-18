@@ -21,7 +21,7 @@ public class OperationMapper {
 	 * @param operator String
 	 * @return Operation - Addition or Subtraction
 	 */
-	public Operation convertToOperation(String operator) {
+	public Operation convertToOperation(final String operator) {
 		return operator.trim().equalsIgnoreCase(Constants.ADD) ? new Addition()
 				: operator.trim().equalsIgnoreCase(Constants.SUB) ? new Subtraction() : null;
 	}

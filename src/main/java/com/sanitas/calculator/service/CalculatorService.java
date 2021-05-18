@@ -11,5 +11,5 @@ import com.sanitas.calculator.model.Operation;
  */
 public interface CalculatorService {
 
-	BigDecimal execute(BigDecimal num1, BigDecimal num2, Operation operator);
+	BigDecimal execute(final BigDecimal num1, final BigDecimal num2, final Operation operator);
 }

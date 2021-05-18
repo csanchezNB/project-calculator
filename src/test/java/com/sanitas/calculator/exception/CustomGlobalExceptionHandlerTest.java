@@ -21,9 +21,9 @@ public class CustomGlobalExceptionHandlerTest {
 
     @Test
     public void whenCreateException_shouldReturnsNewException() {
-    	CustomGlobalExceptionHandler exHandler = new CustomGlobalExceptionHandler();
-    	String myErr = "MyError";
-    	String myDesc = "MyDescription";
+    	final CustomGlobalExceptionHandler exHandler = new CustomGlobalExceptionHandler();
+    	final String myErr = "MyError";
+    	final String myDesc = "MyDescription";
     	GeneralResponseException gre = new GeneralResponseException(HttpStatus.BAD_GATEWAY, myErr, myDesc);
     	ResponseEntity<Object> response = exHandler.handleConflict(gre, null);
 

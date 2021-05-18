@@ -28,13 +28,13 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	 * @return ResponseEntity<Object> ErrorDto
 	 */
 	@ExceptionHandler(value = { GeneralResponseException.class })
-	protected ResponseEntity<Object> handleConflict(GeneralResponseException ex, WebRequest request) {
-		ErrorDto errorDto = new ErrorDto();
+	protected ResponseEntity<Object> handleConflict(final GeneralResponseException ex, final WebRequest request) {
+		final ErrorDto errorDto = new ErrorDto();
 		errorDto.setError(ex.getError());
 		errorDto.setStatus(ex.getStatus().value());
 
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.MASK_DATE_COMPLETE_JSON_ES);
+		final Date date = new Date();
+		final SimpleDateFormat sdf = new SimpleDateFormat(Constants.MASK_DATE_COMPLETE_JSON_ES);
 		errorDto.setTimestamp(sdf.format(date));
 		errorDto.setErrorDescription(ex.getErrorDescription());
 		return handleExceptionInternal(ex, errorDto, new HttpHeaders(), ex.getStatus(), request);
